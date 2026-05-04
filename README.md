@@ -1,20 +1,24 @@
-# TSP — Held-Karp + 2-Aproximado via MST
+# Trabalho TSP — Milena & Kananda
 
-Trabalho de Algoritmos e Estruturas de Dados III — UFPel  
-Algoritmos: **Held-Karp** (exato) e **2-Aproximado MST+DFS** (aproximativo)  
-Linguagem: **C++17**
+Trabalho da disciplina **Algoritmos e Estruturas de Dados III — UFPel**
+Implementação de soluções para o Problema do Caixeiro Viajante (TSP):
+
+* **Held-Karp** (algoritmo exato)
+* **2-Aproximado via MST + DFS** (algoritmo aproximativo)
+
+**Linguagem:** C++17
 
 ---
 
-## Estrutura de Pastas
+## 📁 Estrutura de Pastas
 
 ```
-tsp_project/
+Trabalho_TSP_Milena_Kananda/
 ├── include/
 │   └── tsp.h          ← declarações de funções e tipos
 ├── src/
 │   ├── tsp.cpp        ← implementação dos algoritmos
-│   └── main.cpp       ← leitura de arquivos, medição de tempo, saída
+│   └── main.cpp       ← leitura de arquivos, execução e saída
 ├── instances/
 │   ├── tsp1_253.txt
 │   ├── tsp2_1248.txt
@@ -27,85 +31,122 @@ tsp_project/
 
 ---
 
-## Pré-requisitos
+## ⚙️ Pré-requisitos
 
-- **g++** com suporte a C++17  
-  Linux/macOS: `g++ --version`  
-  Windows (MSYS2/MinGW): `pacman -S mingw-w64-x86_64-gcc`
+* Compilador **g++** com suporte a C++17
+  Linux/macOS:
+
+  ```
+  g++ --version
+  ```
+
+  Windows (MSYS2/MinGW):
+
+  ```
+  pacman -S mingw-w64-x86_64-gcc
+  ```
 
 ---
 
-## Como Compilar
+## 🛠️ Como Compilar
 
-```bash
-# Dentro da pasta tsp_project/
+Dentro da pasta do projeto:
+
+```
 make
 ```
 
-Isso gera o executável `./tsp`.
+Isso gera o executável `tsp.exe` (Windows) ou `tsp` (Linux).
 
-Para limpar:
-```bash
+Para limpar arquivos compilados:
+
+```
 make clean
 ```
 
 ---
 
-## Como Executar
+## ▶️ Como Executar
 
-### Rodar todas as instâncias de uma vez:
-```bash
+### Executar todas as instâncias:
+
+```
 make run
 # ou
 ./tsp
 ```
 
-### Rodar uma instância específica:
-```bash
-./tsp instances/tsp1_253.txt
+### Executar manualmente:
+
 ```
+./tsp
+```
+
+O programa já está configurado para rodar automaticamente todas as instâncias da pasta `instances/`.
 
 ---
 
-## Formato dos Arquivos de Instância
+## 📄 Formato dos Arquivos de Instância
 
-Cada arquivo `.txt` contém:
-- Linha 1: `N` (número de vértices)
-- Linhas seguintes: matriz N×N de distâncias (separadas por espaço)
+Cada arquivo `.txt` contém **apenas a matriz de adjacência**, sem o número de vértices na primeira linha.
 
-Exemplo (`tsp2_1248.txt`, 6 vértices):
+Exemplo:
+
 ```
-6
-0  10  20  ...
-10  0  15  ...
-...
+0 10 15 20
+10 0 35 25
+15 35 0 30
+20 25 30 0
 ```
+
+O número de vértices é determinado automaticamente pela leitura do arquivo.
 
 ---
 
-## Saída Esperada
+## 📊 Saída do Programa
+
+Para cada instância, o programa imprime:
+
+* número de vértices
+* custo encontrado
+* tempo de execução
+* caminho percorrido
+* razão entre custo aproximado e ótimo
+
+Exemplo:
 
 ```
 [2-APROXIMADO (MST + DFS)]
   Custo encontrado : 281.00
-  Razão c/ ótimo   : 1.1107x
-  Tempo            : 0.000006s
-  Tour             : 0 3 7 1 5 ...
+  Razao c/ otimo   : 1.1107x
+  Tempo            : 0.000008s
 
 [HELD-KARP (Exato)]
   Custo encontrado : 253.00
-  Tempo            : 0.005927s
-  Tour             : 0 2 5 1 ...
+  Tempo            : 0.000680s
 ```
 
-Para instâncias com n > 24, o Held-Karp é pulado automaticamente
-(memória necessária seria impraticável: n × 2^n células).
+Para instâncias grandes (n > 24), o algoritmo exato não é executado devido ao alto custo computacional.
 
 ---
 
-## Complexidades
+## 📈 Complexidade dos Algoritmos
 
-| Algoritmo          | Tempo          | Memória       | Garantia       |
-|--------------------|----------------|---------------|----------------|
-| Held-Karp          | O(n² × 2^n)    | O(n × 2^n)    | Solução ótima  |
-| 2-Aprox (MST+DFS)  | O(n²)          | O(n²)         | ≤ 2 × ótimo    |
+| Algoritmo         | Tempo       | Memória    | Garantia            |
+| ----------------- | ----------- | ---------- | ------------------- |
+| Held-Karp         | O(n² × 2^n) | O(n × 2^n) | Solução ótima       |
+| 2-Aprox (MST+DFS) | O(n²)       | O(n²)      | ≤ 2 × solução ótima |
+
+---
+
+## 👩‍💻 Autoras
+
+* Milena Alves Ferreira
+* Kananda (completar nome, se quiser)
+
+---
+
+## 📌 Observações
+
+* O algoritmo exato (Held-Karp) torna-se inviável para instâncias maiores devido à sua complexidade exponencial.
+* O algoritmo aproximativo apresenta execução extremamente rápida e resultados próximos do ótimo, sendo adequado para problemas maiores.
