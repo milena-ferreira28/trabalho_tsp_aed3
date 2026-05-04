@@ -1,0 +1,18 @@
+CXX      = g++
+CXXFLAGS = -std=c++17 -O2 -Wall -Wextra -I include
+
+SRC = src/main.cpp src/tsp.cpp
+BIN = tsp
+
+.PHONY: all clean run
+
+all: $(BIN)
+
+$(BIN): $(SRC)
+	$(CXX) $(CXXFLAGS) -o $(BIN) $(SRC)
+
+run: all
+	./$(BIN)
+
+clean:
+	rm -f $(BIN)
